@@ -1,7 +1,7 @@
 # Leikjaforritun
 
 ## Verkefni 1
-Spurningar:
+Svör við spurningum
 1.
 2.
 3.
@@ -9,7 +9,7 @@ Spurningar:
 5.
 6. 
   - 1
-  - 2
-  - 3
-  - 4
-  - 5
+    - 2
+      - 3
+        - 4
+           - 5
