@@ -15,3 +15,5 @@ Svör við spurningum og spurningar
            - 5 sdsd
 
 [Video af leikjaspilun](https://youtu.be/V11VklUQpxI)
+[FollowPlayer C# skrifta með íslenskum kommentum](https://github.com/AndresHaukur/Leikjaforritun/blob/main/FollowPlayer.cs)
+[PlayerController C# skrifta með íslenskum kommentum](https://github.com/AndresHaukur/Leikjaforritun/blob/main/PlayerController.cs)
