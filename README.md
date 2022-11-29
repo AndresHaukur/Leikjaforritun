@@ -17,3 +17,16 @@ Svör við spurningum og spurningar
 [Video af leikjaspilun](https://youtu.be/V11VklUQpxI).<br>
 [FollowPlayer C# skrifta með íslenskum kommentum](https://github.com/AndresHaukur/Leikjaforritun/blob/main/FollowPlayer.cs).<br>
 [PlayerController C# skrifta með íslenskum kommentum](https://github.com/AndresHaukur/Leikjaforritun/blob/main/PlayerController.cs).<br>
+
+
+## Verkefni 3
+Þessi leikur er gerður af Andrés Hauk Andréssyni og er mjög vel lýstur þegar þú spilar hann. markmiðið er að ná að skjóta alla 6 kassana og finna happapeninginn á jörðinni sem gefur auka stig til að hægt er að vinna leikinn.
+kúlur munu drepa þig þannig reyndu að forðast þær.
+### release af leiknum
+[Release](https://github.com/AndresHaukur/Leikjaforritun/releases/tag/v1.0.0)
+### Þetta er build.zip file með leiknum minum spilanlegum en engin auka files
+[Build.zip](https://github.com/AndresHaukur/Leikjaforritun/files/10066437/Build.zip)
+### Hér fyrir neðan eru allar skrifturnar minar
+[Scripts.zip](https://github.com/AndresHaukur/Leikjaforritun/files/10066488/Scripts.zip)
+### Hér er assets mappan ef ég næ að zippa hana
+[Assets]()
