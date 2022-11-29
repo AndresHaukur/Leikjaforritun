@@ -29,4 +29,4 @@ kúlur munu drepa þig þannig reyndu að forðast þær.
 ### Hér fyrir neðan eru allar skrifturnar minar
 [Scripts.zip](https://github.com/AndresHaukur/Leikjaforritun/files/10066488/Scripts.zip)
 ### Hér er assets mappan ef ég næ að zippa hana
-[Assets]()
+[Assets](https://drive.google.com/drive/folders/1YjSXwx23iAYWFORL9Cf8CfYHpI9wHiOe?usp=sharing)
