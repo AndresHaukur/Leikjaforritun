@@ -32,3 +32,12 @@ kúlur munu drepa þig þannig reyndu að forðast þær.
 [Assets](https://drive.google.com/drive/folders/1YjSXwx23iAYWFORL9Cf8CfYHpI9wHiOe?usp=sharing)
 ### Video af leikjaspilun
 [Video](https://youtu.be/IyBRvObIr6U)
+
+## Verkefni 4
+Þessi leikur er 2D leikur sem heitir Ruby's adventure og fjallar um Ruby að skjóta vonda gæa á einu borði og hún þarf líka að passa sig á hlutum sem gæti meitt hana og mat til að hjálpa henni að fá líf aftur.
+
+[]()
+[]()
+[]()
+[]()
+[]()
