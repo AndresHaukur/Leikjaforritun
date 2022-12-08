@@ -37,5 +37,5 @@ kúlur munu drepa þig þannig reyndu að forðast þær.
 Þessi leikur er 2D leikur sem heitir Ruby's adventure og fjallar um Ruby að skjóta vonda gæa á einu borði og hún þarf líka að passa sig á hlutum sem gæti meitt hana og mat til að hjálpa henni að fá líf aftur. 
 Leikurinn er ókláraður eins og sést á myndbandi og er það útaf endalausum tæknilegum örðugleikum og að þurfa að byrja 2 sinnum upp á nýtt eftir að unity vildi ekki færa project milli talva eða önnur vandræði.
 
-[Video af leikjaspilun](https://youtu.be/J7MTCDBJd5c) <br>
-[Skriftur](https://github.com/AndresHaukur/Leikjaforritun/tree/main/Scripts)
+[Video af leikjaspilun]() <br>
+[Skriftur]()
