@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class HealthCollectible : MonoBehaviour
+/// <summary>
+/// mun höndla það sem gerist þegar Ruby snertir HealthCollectible objectið.
+/// </summary>
+public class HealthCollectible : MonoBehaviour 
 {
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -10,11 +11,8 @@ public class HealthCollectible : MonoBehaviour
 
         if (controller != null)
         {
-            if(controller.health  < controller.maxHealth)
-            {
-                controller.ChangeHealth(1);
-                Destroy(gameObject);
-            }
+            controller.ChangeHealth(1);
+            Destroy(gameObject);
         }
     }
 }

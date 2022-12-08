@@ -1,44 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class RubyController : MonoBehaviour
 {
-    public float speed = 3.0f;
+    // ========= MOVEMENT =================
+    public float speed = 4;
     
+    // ======== HEALTH ==========
     public int maxHealth = 5;
-    
-    public GameObject projectilePrefab;
-    
-    public int health { get { return currentHealth; }}
-    int currentHealth;
-    
     public float timeInvincible = 2.0f;
-    bool isInvincible;
-    float invincibleTimer;
+    public Transform respawnPosition;
+    public ParticleSystem hitParticle;
     
+    // ======== Skot ==========
+    public GameObject projectilePrefab;
+
+    // ======== Hljóð ==========
+    public AudioClip hitSound;
+    public AudioClip shootingSound;
+    
+    // ======== HEALTH ==========
+    public int health
+    {
+        get { return currentHealth; }
+    }
+    
+    // =========== MOVEMENT ==============
     Rigidbody2D rigidbody2d;
-    float horizontal;
-    float vertical;
+    Vector2 currentInput;
     
+    // ======== HEALTH ==========
+    int currentHealth;
+    float invincibleTimer;
+    bool isInvincible;
+   
+    // ==== ANIMATION =====
     Animator animator;
-    Vector2 lookDirection = new Vector2(1,0);
+    Vector2 lookDirection = new Vector2(1, 0);
     
-    // Start is called before the first frame update
+    // ================= Hljóð =======================
+    AudioSource audioSource;
+    
     void Start()
     {
+        // =========== MOVEMENT ==============
         rigidbody2d = GetComponent<Rigidbody2D>();
+                
+        // ======== HEALTH ==========
+        invincibleTimer = -1.0f;
+        currentHealth = maxHealth;
+        
+        // ==== ANIMATION =====
         animator = GetComponent<Animator>();
         
-        currentHealth = maxHealth;
+        // ==== Hljóð =====
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-        
+        // ================= HEALTH ====================
+        if (isInvincible)
+        {
+            invincibleTimer -= Time.deltaTime;
+            if (invincibleTimer < 0)
+                isInvincible = false;
+        }
+
+        // ============== Hreyfing ======================
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+                
         Vector2 move = new Vector2(horizontal, vertical);
         
         if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
@@ -46,55 +78,94 @@ public class RubyController : MonoBehaviour
             lookDirection.Set(move.x, move.y);
             lookDirection.Normalize();
         }
-        
+
+        currentInput = move;
+
+
+        // ============== ANIMATION =======================
+
         animator.SetFloat("Look X", lookDirection.x);
         animator.SetFloat("Look Y", lookDirection.y);
         animator.SetFloat("Speed", move.magnitude);
+
+        // ============== Skot ======================
+
+        if (Input.GetKeyDown(KeyCode.C))
+            LaunchProjectile();
         
-        if (isInvincible)
+        // ======== Tal ==========
+        if (Input.GetKeyDown(KeyCode.X))
         {
-            invincibleTimer -= Time.deltaTime;
-            if (invincibleTimer < 0)
-                isInvincible = false;
+            RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.5f, 1 << LayerMask.NameToLayer("NPC"));
+            if (hit.collider != null)
+            {
+                NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
+                if (character != null)
+                {
+                    character.DisplayDialog();
+                }  
+            }
         }
-        
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            Launch();
-        }
+ 
     }
-    
+
     void FixedUpdate()
     {
         Vector2 position = rigidbody2d.position;
-        position.x = position.x + speed * horizontal * Time.deltaTime;
-        position.y = position.y + speed * vertical * Time.deltaTime;
-
+        
+        position = position + currentInput * speed * Time.deltaTime;
+        
         rigidbody2d.MovePosition(position);
     }
 
+    // ===================== HEALTH ==================
     public void ChangeHealth(int amount)
     {
         if (amount < 0)
-        {
+        { 
             if (isInvincible)
                 return;
             
             isInvincible = true;
             invincibleTimer = timeInvincible;
+            
+            animator.SetTrigger("Hit");
+            audioSource.PlayOneShot(hitSound);
+
+            Instantiate(hitParticle, transform.position + Vector3.up * 0.5f, Quaternion.identity);
         }
         
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        Debug.Log(currentHealth + "/" + maxHealth);
+        
+        if(currentHealth == 0)
+            Respawn();
+        
+        UIHealthBar.Instance.SetValue(currentHealth / (float)maxHealth);
     }
     
-    void Launch()
+    void Respawn()
+    {
+        ChangeHealth(maxHealth);
+        transform.position = respawnPosition.position;
+    }
+    
+// =============== Skot ========================
+    void LaunchProjectile()
     {
         GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
 
         Projectile projectile = projectileObject.GetComponent<Projectile>();
         projectile.Launch(lookDirection, 300);
-
+        
         animator.SetTrigger("Launch");
+        audioSource.PlayOneShot(shootingSound);
+    }
+    
+    // =============== hljóð ==========================
+
+    //Allow to play a sound on the player sound source. used by Collectible
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 }
